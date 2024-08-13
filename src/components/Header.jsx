@@ -1,13 +1,20 @@
-// src/components/Header.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDashboard } from '../contexts/DashboardContext';
 
 const Header = () => {
   const { isDaily, toggleDashboard } = useDashboard();
+  const navigate = useNavigate(); // Hook to navigate programmatically
+
+  const handleLogoClick = () => {
+    navigate('/'); // Navigate to the homepage
+  };
 
   return (
     <header className="bg-blue-600 text-white p-4 flex justify-between items-center">
-      <h1 className="text-2xl">SalTurno</h1>
+      <h1 className="text-2xl cursor-pointer" onClick={handleLogoClick}>
+        SalTurno
+      </h1>
       <div className="flex items-center space-x-4">
         <p>{isDaily ? 'Daily Dashboard' : 'Weekly Dashboard'}</p>
         <div

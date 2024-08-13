@@ -1,17 +1,11 @@
+// src/components/Table.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const Table = ({ title, tasks, findEmployeeForTask, color }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate(); // Hook to navigate programmatically
 
   const toggleTable = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleEmployeeClick = (employeeName) => {
-    // Navigate to the employee's page
-    navigate(`/employees/${employeeName}`);
   };
 
   return (
@@ -39,16 +33,7 @@ const Table = ({ title, tasks, findEmployeeForTask, color }) => {
                     <tr key={idx} className={`hover:bg-gray-50 ${idx !== tasks.length - 1 ? 'border-b border-gray-200' : ''}`}>
                       <td className="py-2 px-4 w-1/2">{task}</td>
                       <td className="py-2 px-4 w-1/2">
-                        {employee ? (
-                          <p
-                            className="cursor-pointer"
-                            onClick={() => handleEmployeeClick(employee.name)}
-                          >
-                            {employee.name}
-                          </p>
-                        ) : (
-                          <p>Nessun dipendente assegnato</p>
-                        )}
+                        {employee ? <p>{employee.name}</p> : <p>Nessun dipendente assegnato</p>}
                       </td>
                     </tr>
                   );

@@ -1,7 +1,9 @@
 import React from 'react';
 import { allTasks } from '../../data/tasks';
-import Table from './Table';
+import DailyTaskGrid from './DailyTaskGrid';
+import Title from './Title';
 
+// Function to get the current week's days with dates
 const getCurrentWeekDays = () => {
   const today = new Date();
   const daysOfWeek = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
@@ -15,19 +17,17 @@ const getCurrentWeekDays = () => {
 
 const daysOfWeek = getCurrentWeekDays();
 
-const getCurrentWeekDaysAbbr = () => {
-  const daysOfWeek = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
-  return daysOfWeek; // Just return the abbreviations, no date
-};
-
-const daysOfWeekAbbr = getCurrentWeekDaysAbbr();
-
-
 const TaskGrid = () => {
-  const tasks = allTasks; // assuming allTasks contains the tasks data
-
   return (
-    <Table daysOfWeek={daysOfWeek} daysOfWeekAbbr = {daysOfWeekAbbr}/>
+    <div className="mt-6 space-y-8">
+      <h1 className="text-3xl font-semibold text-gray-800 ml-2">Programma settimanale</h1>
+      {daysOfWeek.map((day, index) => (
+        <div key={index} className="border border-gray-300 rounded-md shadow-lg">
+          <Title title={day} />
+          <DailyTaskGrid day={day.split(' ')[0]} />      
+        </div>
+      ))}
+    </div>
   );
 };
 

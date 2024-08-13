@@ -1,21 +1,18 @@
-// src/contexts/DashboardContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const DashboardContext = createContext();
 
-export const useDashboard = () => {
-  return useContext(DashboardContext);
-};
+export const useDashboard = () => useContext(DashboardContext);
 
 export const DashboardProvider = ({ children }) => {
-  const [isDaily, setIsDaily] = useState(true);
+  const [isDaily, setIsDaily] = useState(false);
 
-  const toggleDashboard = () => {
-    setIsDaily(prevIsDaily => !prevIsDaily);
-  };
+  const toggleDashboard = () => setIsDaily(!isDaily);
+  
+  const setToWeekly = () => setIsDaily(false); // Ensure it's set to Weekly
 
   return (
-    <DashboardContext.Provider value={{ isDaily, toggleDashboard }}>
+    <DashboardContext.Provider value={{ isDaily, toggleDashboard, setToWeekly }}>
       {children}
     </DashboardContext.Provider>
   );
